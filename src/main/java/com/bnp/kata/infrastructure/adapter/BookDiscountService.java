@@ -1,5 +1,6 @@
 package com.bnp.kata.infrastructure.adapter;
 
+import com.bnp.kata.domain.BookGroupInfo;
 import com.bnp.kata.domain.ResultsDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -34,8 +35,11 @@ public class BookDiscountService {
     public ResultsDto calculateBookDiscounts(int nrBooks) {
         log.info("Calculating discounts for {} books",nrBooks);
         List<String> bookList = generateRandomBookList(nrBooks);
+        BookGroupInfo bookGroupInfo = new BookGroupInfo(BOOK_PRICE, discountRates);
         Map<String, Long> bookCountByTitle = bookList.stream().collect(groupingBy(Function.identity(), counting()));
-
+        while (!bookCountByTitle.isEmpty()) {
+            bookCountByTitle.forEach((k, v) -> System.out.println(k + ": " + v));
+        }
         return new ResultsDto("Calculating discounts for.. " + nrBooks, bookList, bookCountByTitle);
     }
 
