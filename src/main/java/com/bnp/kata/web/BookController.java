@@ -19,7 +19,7 @@ public class BookController {
     @GetMapping
     public String calculateDiscount(@RequestParam("nrbooks") String nrBooks) {
         bookDiscountService.calculateBookDiscounts(nrBooks);
-        return nrBooks;
+        return "number of random books " + nrBooks;
     }
 
 }

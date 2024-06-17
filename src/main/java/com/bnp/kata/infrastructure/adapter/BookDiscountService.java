@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 public class BookDiscountService {
 
     public void calculateBookDiscounts(String nrBooks) {
-        log.info("Calculating discounts for {} books", nrBooks);
+        log.info("Calculating discounts for {} books",nrBooks);
         int n = Integer.parseInt(nrBooks);
         List<String> books = generateRandomBookList(n);
         books.forEach(System.out::println);
