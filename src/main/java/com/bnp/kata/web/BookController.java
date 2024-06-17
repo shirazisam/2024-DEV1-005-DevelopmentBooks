@@ -21,13 +21,11 @@ public class BookController {
 
     @GetMapping
     public ResultsDto calculateDiscount(@RequestParam("nrbooks") String nrBooks) {
-        int n;
         try {
-            n = Integer.parseInt(nrBooks);
+            bookDiscountService.calculateBookDiscounts(Integer.parseInt(nrBooks));
         } catch (NumberFormatException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "'nrbooks' must be a number", e);
         }
-        bookDiscountService.calculateBookDiscounts(n);
         return new ResultsDto("number of random books " + nrBooks);
     }
 
