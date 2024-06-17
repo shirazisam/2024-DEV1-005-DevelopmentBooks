@@ -10,10 +10,9 @@ import java.util.stream.IntStream;
 @Service
 public class BookDiscountService {
 
-    public void calculateBookDiscounts(String nrBooks) {
+    public void calculateBookDiscounts(int nrBooks) {
         log.info("Calculating discounts for {} books",nrBooks);
-        int n = Integer.parseInt(nrBooks);
-        List<String> books = generateRandomBookList(n);
+        List<String> books = generateRandomBookList(nrBooks);
         books.forEach(System.out::println);
     }
 
