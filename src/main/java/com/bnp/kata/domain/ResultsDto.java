@@ -16,4 +16,5 @@ public class ResultsDto {
     private String message;
     List<String> books;
     Map<String, Long> bookCountByTitle;
+    Map<Integer, Integer> groupings;
 }

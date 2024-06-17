@@ -37,10 +37,29 @@ public class BookDiscountService {
         List<String> bookList = generateRandomBookList(nrBooks);
         BookGroupInfo bookGroupInfo = new BookGroupInfo(BOOK_PRICE, discountRates);
         Map<String, Long> bookCountByTitle = bookList.stream().collect(groupingBy(Function.identity(), counting()));
+        Map<String, Long> bookCountByTitleCopy = bookCountByTitle;
         while (!bookCountByTitle.isEmpty()) {
-            bookCountByTitle.forEach((k, v) -> System.out.println(k + ": " + v));
+            bookGroupInfo.add(bookCountByTitle.size());
+            bookCountByTitle = reduceBookCount(bookCountByTitle);
         }
-        return new ResultsDto("Calculating discounts for.. " + nrBooks, bookList, bookCountByTitle);
+        return new ResultsDto("Calculating discounts for.. " + nrBooks, bookList, bookCountByTitleCopy, bookGroupInfo.groupings());
+    }
+
+    /**
+     * Aggregates the books into groups of 5, then 4, 3, 2, 1 in order to maximize
+     * the discounts.
+     * @param bookCountByTitle aggregated book list by title
+     * @return the new reduced list
+     */
+    Map<String, Long> reduceBookCount(Map<String, Long> bookCountByTitle) {
+        Map<String, Long> newMap = new HashMap<>();
+        for (String book : bookCountByTitle.keySet()) {
+            Long count = bookCountByTitle.get(book);
+            if (count > 1) {
+                newMap.put(book, count - 1);
+            }
+        }
+        return newMap;
     }
 
     /**

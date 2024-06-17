@@ -16,4 +16,15 @@ public class BookGroupInfo {
         this.discountRates = discountRates;
     }
 
+    /**
+     * Aggregate the books by group sizes (not titles!)
+     * @param bookGroup the group size (1..5)
+     */
+    public void add(int bookGroup) {
+        groupings.compute(bookGroup, (currentBookGroup, currentCount) -> currentCount == null ? 1 : currentCount + 1);
+    }
+
+    public Map<Integer, Integer> groupings() {
+        return groupings;
+    }
 }
