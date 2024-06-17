@@ -35,14 +35,28 @@ public class BookDiscountService {
     public ResultsDto calculateBookDiscounts(int nrBooks) {
         log.info("Calculating discounts for {} books",nrBooks);
         List<String> bookList = generateRandomBookList(nrBooks);
-        BookGroupInfo bookGroupInfo = new BookGroupInfo(BOOK_PRICE, discountRates);
+        BookGroupInfo bookGroupInfo = new BookGroupInfo(BOOK_PRICE, discountRates, nrBooks);
+        /* aggregate book count by title */
         Map<String, Long> bookCountByTitle = bookList.stream().collect(groupingBy(Function.identity(), counting()));
         Map<String, Long> bookCountByTitleCopy = bookCountByTitle;
         while (!bookCountByTitle.isEmpty()) {
             bookGroupInfo.add(bookCountByTitle.size());
             bookCountByTitle = reduceBookCount(bookCountByTitle);
         }
-        return new ResultsDto("Calculating discounts for.. " + nrBooks, bookList, bookCountByTitleCopy, bookGroupInfo.groupings());
+        bookGroupInfo.displayTotalDiscountsByGroup();
+        Double totalDiscountedPrice = bookGroupInfo.getTotalDiscountedPrice();
+        Double totalPrice = bookGroupInfo.getTotalPrice();
+        Double percentageDiscount = bookGroupInfo.getPercentageDiscount();
+
+        return ResultsDto.builder()
+                .bookPrice(BOOK_PRICE)
+                .books(bookList)
+                .bookCountByTitle(bookCountByTitleCopy)
+                .groupings(bookGroupInfo.groupings())
+                .totalDiscountPrice(totalDiscountedPrice)
+                .totalPrice(totalPrice)
+                .percentageDiscount(percentageDiscount)
+                .build();
     }
 
     /**

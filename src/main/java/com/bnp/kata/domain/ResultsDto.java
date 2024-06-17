@@ -13,8 +13,11 @@ import java.util.Map;
 @NoArgsConstructor
 @Builder
 public class ResultsDto {
-    private String message;
-    List<String> books;
-    Map<String, Long> bookCountByTitle;
-    Map<Integer, Integer> groupings;
+    private Integer bookPrice;
+    private List<String> books;
+    private Map<String, Long> bookCountByTitle;
+    private Map<Integer, Integer> groupings;
+    private Double totalPrice;
+    private Double totalDiscountPrice;
+    private Double percentageDiscount;
 }
