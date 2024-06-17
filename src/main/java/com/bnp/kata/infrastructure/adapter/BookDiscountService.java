@@ -1,12 +1,17 @@
 package com.bnp.kata.infrastructure.adapter;
 
+import com.bnp.kata.domain.ResultsDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 
 @Slf4j
 @Service
@@ -26,10 +31,12 @@ public class BookDiscountService {
         return discountRates;
     }
 
-    public void calculateBookDiscounts(int nrBooks) {
+    public ResultsDto calculateBookDiscounts(int nrBooks) {
         log.info("Calculating discounts for {} books",nrBooks);
-        List<String> books = generateRandomBookList(nrBooks);
-        books.forEach(System.out::println);
+        List<String> bookList = generateRandomBookList(nrBooks);
+        Map<String, Long> bookCountByTitle = bookList.stream().collect(groupingBy(Function.identity(), counting()));
+
+        return new ResultsDto("Calculating discounts for.. " + nrBooks, bookList, bookCountByTitle);
     }
 
     /**
