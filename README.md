@@ -7,7 +7,7 @@ This application runs on Java 18
 - clone the repository in a directory:
 ```
 git clone https://github.com/shirazisam/2024-DEV1-005-DevelopmentBooks.git
-cd 2024-DEV1-005-DevelopmentBooks.git
+cd 2024-DEV1-005-DevelopmentBooks
 ```
 - Run Maven (or use the wrapper supplied): 
 ```
