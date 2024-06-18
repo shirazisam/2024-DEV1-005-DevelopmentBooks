@@ -48,7 +48,7 @@ class BookDiscountServiceTest {
         /* groupings.. */
         Map<Integer, Integer> groupings = resultsDto.getGroupings();
         Assertions.assertEquals(1, groupings.get(5));  // 1 group of 5
-        Assertions.assertEquals(1, groupings.get(3));  // 1 group of 5
+        Assertions.assertEquals(1, groupings.get(3));  // 1 group of 3
         Assertions.assertNull(groupings.get(1));  // no single books
         Assertions.assertNull(groupings.get(2));  // no grouping of 2 books
         Assertions.assertNull(groupings.get(4));  // no grouping of 4 books
