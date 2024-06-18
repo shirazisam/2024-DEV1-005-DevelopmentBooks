@@ -1,18 +1,16 @@
 package com.bnp.kata.infrastructure.adapter;
 
-import com.bnp.kata.domain.BookGroupInfo;
 import com.bnp.kata.domain.ResultsDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class BookDiscountServiceTest {
 
@@ -20,9 +18,14 @@ class BookDiscountServiceTest {
 
     @Test
     void calculateBookDiscounts() {
-        ResultsDto resultsDto = bookDiscountService.calculateBookDiscounts(10);
+        ResultsDto resultsDto = bookDiscountService.calculateBookDiscounts(11);
         Assertions.assertNotNull(resultsDto);
-        Assertions.assertEquals(10, resultsDto.getBooks().size());
+        Assertions.assertEquals(11, resultsDto.getBooks().size());
+        var bookCountByTitle = resultsDto.getBookCountByTitle();
+        AtomicLong totalBooks = new AtomicLong(0L);
+        bookCountByTitle.forEach((k, v) -> totalBooks.addAndGet(v));
+        /* sum of aggregates should add up to total number of books */
+        Assertions.assertEquals(11, totalBooks.get());
     }
 
     @Test
