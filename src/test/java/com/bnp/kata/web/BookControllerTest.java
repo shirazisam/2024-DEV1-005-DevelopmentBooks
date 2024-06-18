@@ -22,8 +22,7 @@ class BookControllerTest {
     void calculateDiscount() throws Exception {
         mvc.perform(get("/books?nrbooks=10"))
                 .andDo(print())
-                .andExpect(status()
-                .isOk())
+                .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.bookPrice").value("50"));
 
