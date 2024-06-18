@@ -1,7 +1,10 @@
 # 2024-DEV1-005-DevelopmentBooks
 
- For brevity, I have named the books simply as Book 1, Book 2, ... Book 5 instead of referring to the book titles.
-This application runs on Java 18
+For brevity, I have named the books simply as Book 1, Book 2, ... Book 5 instead of referring to the book titles.
+This application runs on Java 18.
+
+The algorithm works by finding as many groups of 5 books first (the largest discount). Then when there are no more groups of 5 books, it looks for groups of 4 (the next biggest discount), and so on until all books have been grouped. A group is a set of unique (different) books. i.e, there are no duplicates. 
+
 ## Installing and running the application
 
 - clone the repository in a directory:
@@ -13,17 +16,17 @@ cd 2024-DEV1-005-DevelopmentBooks
 ```
 mvnw install
 ```
-make sure your JAVA_HOME environment variable is set correctly
+make sure your ```JAVA_HOME``` environment variable is set correctly
 
-- run the application
+- launch the application:
 ```
 mvnw spring-boot:run
 ```
-- Run the app from a browser, or Postman using the following URL:
+- Access the app from a browser, or Postman using the following URL:
 ```
 http://localhost/bnp-kata/books?nrbooks=12
 ```
-the above command will randomly generate 12 books of Book 1 to Book 5.
+The above command will randomly generate 12 books of Book 1 to Book 5.
 The output will be a JSON object with information about:
 - Book price
 - List of books
