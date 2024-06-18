@@ -34,11 +34,11 @@ public class BookGroupInfo {
         return groupings;
     }
 
-    public void displayTotalDiscountsByGroup() {
+    public void logTotalDiscountsByGroup() {
         groupings.forEach((bookGroup, groupCount) -> {
             Integer discountPc = discountRates.get(bookGroup);
             double factor = 1 - (double) discountPc/100;
-            log.info(groupCount + " x " + bookGroup + " x " + bookPrice + " (-" + discountPc + "%) = " + groupCount*bookGroup * bookPrice * factor);
+            log.info("{} x {} x {} (-{}%) = {}", groupCount, bookGroup, bookPrice, discountPc, groupCount * bookGroup * bookPrice * factor);
         });
     }
 

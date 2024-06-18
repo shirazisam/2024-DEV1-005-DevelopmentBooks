@@ -42,12 +42,12 @@ public class BookDiscountService {
         BookGroupInfo bookGroupInfo = new BookGroupInfo(BOOK_PRICE, discountRates, bookList.size());
         /* aggregate book count by title */
         Map<String, Long> bookCountByTitle = bookList.stream().collect(groupingBy(Function.identity(), counting()));
-        Map<String, Long> bookCountByTitleCopy = bookCountByTitle;
+        var bookCountByTitleCopy = bookCountByTitle;
         while (!bookCountByTitle.isEmpty()) {
             bookGroupInfo.add(bookCountByTitle.size());
             bookCountByTitle = reduceBookCount(bookCountByTitle);
         }
-        bookGroupInfo.displayTotalDiscountsByGroup();
+        bookGroupInfo.logTotalDiscountsByGroup();
         Double totalDiscountedPrice = bookGroupInfo.getTotalDiscountedPrice();
         Double totalPrice = bookGroupInfo.getTotalPrice();
         Double percentageDiscount = bookGroupInfo.getPercentageDiscount();
