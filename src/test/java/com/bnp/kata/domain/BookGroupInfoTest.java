@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class BookGroupInfoTest {
 
     private final Map<Integer, Integer> discountRates = initialiseDiscountRates();
