@@ -12,7 +12,7 @@ public class BookGroupInfo {
     private final Map<Integer, Integer> discountRates;
     private final int numberOfBooks;
 
-    Map<Integer, Integer> groupings = new HashMap<>();
+    Map<Integer, Integer> groupings = new HashMap<>();  // key = groupSize (1-5), value = quantity
 
 
     public BookGroupInfo(int bookPrice, Map<Integer, Integer> discountRates, int nrBooks) {
