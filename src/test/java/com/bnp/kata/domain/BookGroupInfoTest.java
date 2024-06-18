@@ -40,23 +40,27 @@ class BookGroupInfoTest {
         Assertions.assertEquals(3, bookGroupInfo.groupings().get(3));
     }
 
-    @Test
-    void groupings() {
-    }
 
     @Test
-    void displayTotalDiscountsByGroup() {
-    }
-
-    @Test
-    void getTotalDiscountedPriceOneBookInEachGroup() {
+    void getTotalDiscountedPriceForExactlyFiveGroupings() {
+        bookGroupInfo = new BookGroupInfo(50, discountRates, 15);
         bookGroupInfo.add(1);  // 0% discount
         bookGroupInfo.add(2);  // 5%
         bookGroupInfo.add(3);  // 10%
         bookGroupInfo.add(4);  // 20%
         bookGroupInfo.add(5);  // 25%
-        System.out.println("bookGroupInfo = " + bookGroupInfo.groupings());
         Assertions.assertEquals(627.50, bookGroupInfo.getTotalDiscountedPrice());
+        Assertions.assertEquals(15*50, bookGroupInfo.getTotalPrice());
+    }
+
+    @Test
+    void getTotalDiscountedPriceFor3groupsOf4and2groupsOf5() {
+        bookGroupInfo.add(4);
+        bookGroupInfo.add(4);
+        bookGroupInfo.add(4);
+        bookGroupInfo.add(5);
+        bookGroupInfo.add(5);
+        Assertions.assertEquals(855.0, bookGroupInfo.getTotalDiscountedPrice());
     }
 
     @Test
@@ -69,16 +73,13 @@ class BookGroupInfoTest {
         Assertions.assertEquals(1, bookGroupInfo.groupings().size());
         Assertions.assertEquals(4, bookGroupInfo.groupings().get(1));
         Assertions.assertEquals(200, bookGroupInfo.getTotalDiscountedPrice()); // no discount
+        /* the total price should be the same as the total discount price since there is no discount */
         Assertions.assertEquals(bookGroupInfo.getTotalPrice(), bookGroupInfo.getTotalDiscountedPrice()); // no discount
     }
 
     @Test
     void getTotalPrice() {
         Assertions.assertEquals(500.0, bookGroupInfo.getTotalPrice()); // 10 books
-    }
-
-    @Test
-    void getPercentageDiscount() {
     }
 
     private Map<Integer, Integer> initialiseDiscountRates() {
@@ -90,6 +91,5 @@ class BookGroupInfoTest {
         discountRates.put(5, 25); // ..
         return discountRates;
     }
-
 
 }

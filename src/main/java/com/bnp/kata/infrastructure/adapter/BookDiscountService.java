@@ -33,9 +33,13 @@ public class BookDiscountService {
     }
 
     public ResultsDto calculateBookDiscounts(int nrBooks) {
-        log.info("Calculating discounts for {} books",nrBooks);
-        List<String> bookList = generateRandomBookList(nrBooks);
-        BookGroupInfo bookGroupInfo = new BookGroupInfo(BOOK_PRICE, discountRates, nrBooks);
+        return calculateBookDiscounts(generateRandomBookList(nrBooks));
+    }
+
+
+    public ResultsDto calculateBookDiscounts(List<String> bookList) {
+        log.info("Calculating discounts for {} books", bookList.size());
+        BookGroupInfo bookGroupInfo = new BookGroupInfo(BOOK_PRICE, discountRates, bookList.size());
         /* aggregate book count by title */
         Map<String, Long> bookCountByTitle = bookList.stream().collect(groupingBy(Function.identity(), counting()));
         Map<String, Long> bookCountByTitleCopy = bookCountByTitle;
