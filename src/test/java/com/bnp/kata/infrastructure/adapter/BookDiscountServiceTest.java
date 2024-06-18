@@ -27,6 +27,7 @@ class BookDiscountServiceTest {
 
     @Test
     void getPercentageDiscountOn8books() {
+        /* from the example in the kata */
         String book1 = "Book 1";
         String book2 = "Book 1";
         String book3 = "Book 2";
