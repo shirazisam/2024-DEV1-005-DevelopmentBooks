@@ -25,17 +25,18 @@ class BookGroupInfoTest {
     @Test
     void add() {
         bookGroupInfo.add(3);
-        Assertions.assertEquals(1, bookGroupInfo.groupings().size());
-        Assertions.assertEquals(1, bookGroupInfo.groupings().get(3));
+        Map<Integer, Integer> groupings = bookGroupInfo.groupings();
+        Assertions.assertEquals(1, groupings.size());
+        Assertions.assertEquals(1, groupings.get(3));
         bookGroupInfo.add(5);
-        Assertions.assertEquals(2, bookGroupInfo.groupings().size());
-        Assertions.assertEquals(1, bookGroupInfo.groupings().get(3));
-        Assertions.assertEquals(1, bookGroupInfo.groupings().get(5));
+        Assertions.assertEquals(2, groupings.size());
+        Assertions.assertEquals(1, groupings.get(3));
+        Assertions.assertEquals(1, groupings.get(5));
         bookGroupInfo.add(3);
-        Assertions.assertEquals(2, bookGroupInfo.groupings().size());
-        Assertions.assertEquals(2, bookGroupInfo.groupings().get(3));
+        Assertions.assertEquals(2, groupings.size());
+        Assertions.assertEquals(2, groupings.get(3));
         bookGroupInfo.add(3);
-        Assertions.assertEquals(3, bookGroupInfo.groupings().get(3));
+        Assertions.assertEquals(3, groupings.get(3));
     }
 
 
