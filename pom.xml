@@ -88,12 +88,21 @@
                                 </assembly>
                                 <tags>
                                     <tag>latest</tag>
-<!--                                    <tag>${project.version}</tag>-->
+<!--                                <tag>${project.version}</tag> -->
                                 </tags>
                             </build>
                         </image>
                     </images>
                 </configuration>
+
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
         </plugins>
