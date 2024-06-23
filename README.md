@@ -36,3 +36,25 @@ The output will be a JSON object with information about:
 - calculation of % discount
 
 use the request parameter ```nrbooks``` to randomly change the number of books generated.
+
+## Running the application as a Docker container
+
+If Docker is installed, the application can be launched as a container.
+First, ```package``` the application as a Docker image:
+- in the project root folder, run the Maven package phase:
+```
+mvnv package
+```
+This will build the application and create the Docker image on the local file system.
+
+- now run the container:
+```
+docker container run -d -p 80:80 bnp-kata
+```
+This will launch the application in detached mode, using the default http web port (80).
+Now run the application from the browser as before, or Postman using a GET request:
+```
+http://localhost/bnp-kata/books?nrbooks=10
+```
+This above example generates 10 random books of Book 1...Book 2. The aggregates,groupings and discounts
+are displayed in the output JSON format.
