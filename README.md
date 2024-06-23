@@ -56,5 +56,37 @@ Now run the application from the browser as before, or Postman using a GET reque
 ```
 http://localhost/bnp-kata/books?nrbooks=10
 ```
-This above example generates 10 random books of Book 1...Book 2. The aggregates,groupings and discounts
-are displayed in the output JSON format.
+This above example generates 10 random books of Book 1...Book 5. The aggregates,groupings and discounts
+are displayed in the output JSON format. Example output:
+```
+{
+  "bookPrice": 50,
+  "books": [
+    "Book 1",
+    "Book 1",
+    "Book 2",
+    "Book 3",
+    "Book 3",
+    "Book 3",
+    "Book 4",
+    "Book 4",
+    "Book 4",
+    "Book 5"
+  ],
+  "bookCountByTitle": {
+    "Book 1": 2,
+    "Book 2": 1,
+    "Book 3": 3,
+    "Book 4": 3,
+    "Book 5": 1
+  },
+  "groupings": {
+    "2": 1,
+    "3": 1,
+    "5": 1
+  },
+  "totalPrice": 500,
+  "totalDiscountPrice": 417.5,
+  "percentageDiscount": 16.5
+}
+```
