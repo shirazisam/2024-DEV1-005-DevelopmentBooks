@@ -39,11 +39,11 @@ use the request parameter ```nrbooks``` to randomly change the number of books g
 
 ## Running the application as a Docker container
 
-If Docker is installed, the application can be launched as a container.
-First, ```package``` the application as a Docker image:
-- in the project root folder, run the Maven package phase:
+If Docker is installed, the application can be launched as a container
+by running the Docker build image target.
+- in the project root folder, run the following:
 ```
-mvnv package
+mvnv package docker:build
 ```
 This will build the application and create the Docker image on the local file system.
 
